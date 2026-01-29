@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask SQLAlchemy ORM Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            color: #4CAF50;
+            margin-top: 2rem;
+        }
+        h3 {
+            margin-top: 1.5rem;
+            color: #333;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            overflow-x: auto;
+            border-left: 4px solid #4CAF50;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flask SQLAlchemy ORM Documentation</h1>
+        <p>Researched and written by Krishnamohan Yagneswaran</p>
+    </header>
+    <main>
+        <section>
+            <p><strong>Note:</strong> This documentation was written for self-learning purposes to better understand Flask-SQLAlchemy ORM. For complete and official documentation, visit <a href="https://docs.sqlalchemy.org/en/20/orm/quickstart.html" target="_blank">SQLAlchemy Official Documentation</a>.</p>
+        </section>
+
+        <section>
+            <h2>Introduction to SQLAlchemy ORM</h2>
+            <p>ORM stands for <strong>Object Relational Mapper</strong>. In simple terms, ORM lets you work with a database using Python objects instead of raw SQL queries.</p>
+            <p>Instead of writing SQL:</p>
+            <pre>SELECT * FROM users WHERE id = 1;</pre>
+            <p>You can write Python code like:</p>
+            <pre>user = session.get(User, 1)</pre>
+            <p>SQLAlchemy has two main parts:</p>
+            <ol>
+                <li><strong>Core</strong> – SQL expressions, closer to raw SQL</li>
+                <li><strong>ORM</strong> – Object-Oriented approach to interact with tables and rows</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>ORM Key Concepts</h2>
+            
+            <h3>Model</h3>
+            <p>Models are Python classes that represent database tables. Each model:</p>
+            <ul>
+                <li>Maps to one table</li>
+                <li>Each attribute maps to one column</li>
+                <li>Each object maps to one row</li>
+            </ul>
+            <pre>
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50))
+            </pre>
+
+            <h3>Column</h3>
+            <p>A <strong>Column</strong> defines a field in a table, including its data type, constraints, and other attributes.</p>
+            <pre>
+id = db.Column(db.Integer, primary_key=True)
+username = db.Column(db.String(50), unique=True, nullable=False)
+            </pre>
+
+            <h3>Primary Key</h3>
+            <p>Primary key uniquely identifies each row in a table:</p>
+            <pre>id = db.Column(db.Integer, primary_key=True)</pre>
+
+            <h3>Query</h3>
+            <p>Query objects retrieve data using Python:</p>
+            <pre>user = User.query.filter_by(username="john").first()</pre>
+
+            <h3>Session</h3>
+            <p>The session tracks changes to objects and handles database communication:</p>
+            <pre>
+db.session.add(new_user)
+db.session.commit()
+            </pre>
+
+            <h3>Commit</h3>
+            <p>Commits changes in the current session to the database:</p>
+            <pre>db.session.commit()</pre>
+
+            <h3>Rollback</h3>
+            <p>Reverts uncommitted changes in case of errors:</p>
+            <pre>db.session.rollback()</pre>
+
+            <h3>Engine</h3>
+            <p>The engine connects SQLAlchemy to the database:</p>
+            <pre>app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/login_db'</pre>
+
+            <h3>Metadata</h3>
+            <p>Metadata stores information about tables, columns, and constraints:</p>
+            <pre>
+with app.app_context():
+    db.create_all()
+            </pre>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Krishnamohan Yagneswaran</p>
+    </footer>
+</body>
+</html>
