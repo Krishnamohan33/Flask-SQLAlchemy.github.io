@@ -13,17 +13,49 @@
             padding: 0;
             background-color: #f9f9f9;
             color: #333;
+            display: flex;
+            min-height: 100vh;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 2rem;
-            text-align: center;
+
+        /* Sidebar */
+        nav {
+            width: 220px;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
         }
-        header h1 {
-            margin: 0;
+
+        nav h2 {
+            color: #4CAF50;
+            font-size: 1.2rem;
+            margin-top: 0;
         }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 1rem 0;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        /* Main content */
         main {
+            flex: 1;
             max-width: 900px;
             margin: 2rem auto;
             padding: 1rem 2rem;
@@ -31,47 +63,97 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 8px;
         }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-left: 220px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
         h2 {
             color: #4CAF50;
             margin-top: 2rem;
         }
+
         h3 {
             margin-top: 1.5rem;
             color: #333;
         }
+
         pre {
             background-color: #f4f4f4;
             padding: 1rem;
             overflow-x: auto;
             border-left: 4px solid #4CAF50;
         }
+
         a {
             color: #4CAF50;
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         footer {
             text-align: center;
             padding: 1rem;
             color: #777;
+            margin-left: 220px;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+            }
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+            }
+            header, footer {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
 <body>
+
+    <nav>
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#model">Model</a></li>
+            <li><a href="#column">Column</a></li>
+            <li><a href="#primary-key">Primary Key</a></li>
+            <li><a href="#query">Query</a></li>
+            <li><a href="#session">Session</a></li>
+            <li><a href="#commit">Commit</a></li>
+            <li><a href="#rollback">Rollback</a></li>
+            <li><a href="#engine">Engine</a></li>
+            <li><a href="#metadata">Metadata</a></li>
+        </ul>
+    </nav>
+
     <header>
         <h1>Flask SQLAlchemy ORM Documentation</h1>
         <p>Researched and written by Krishnamohan Yagneswaran</p>
     </header>
-    <main>
-        <section>
-            <p><strong>Note:</strong> This documentation was written for self-learning purposes to better understand Flask-SQLAlchemy ORM. For complete and official documentation, visit <a href="https://docs.sqlalchemy.org/en/20/orm/quickstart.html" target="_blank">SQLAlchemy Official Documentation</a>.</p>
-        </section>
 
-        <section>
+    <main>
+        <section id="introduction">
+            <p><strong>Note:</strong> This documentation was written for self-learning purposes to better understand Flask-SQLAlchemy ORM. For complete and official documentation, visit <a href="https://docs.sqlalchemy.org/en/20/orm/quickstart.html" target="_blank">SQLAlchemy Official Documentation</a>.</p>
+
             <h2>Introduction to SQLAlchemy ORM</h2>
-            <p>ORM stands for <strong>Object Relational Mapper</strong>. In simple terms, ORM lets you work with a database using Python objects instead of raw SQL queries.</p>
+            <p>ORM stands for <strong>Object Relational Mapper</strong>. ORM lets you work with a database using Python objects instead of raw SQL queries.</p>
             <p>Instead of writing SQL:</p>
             <pre>SELECT * FROM users WHERE id = 1;</pre>
             <p>You can write Python code like:</p>
@@ -83,10 +165,8 @@
             </ol>
         </section>
 
-        <section>
-            <h2>ORM Key Concepts</h2>
-            
-            <h3>Model</h3>
+        <section id="model">
+            <h2>Model</h2>
             <p>Models are Python classes that represent database tables. Each model:</p>
             <ul>
                 <li>Maps to one table</li>
@@ -98,42 +178,58 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50))
             </pre>
+        </section>
 
-            <h3>Column</h3>
+        <section id="column">
+            <h2>Column</h2>
             <p>A <strong>Column</strong> defines a field in a table, including its data type, constraints, and other attributes.</p>
             <pre>
 id = db.Column(db.Integer, primary_key=True)
 username = db.Column(db.String(50), unique=True, nullable=False)
             </pre>
+        </section>
 
-            <h3>Primary Key</h3>
+        <section id="primary-key">
+            <h2>Primary Key</h2>
             <p>Primary key uniquely identifies each row in a table:</p>
             <pre>id = db.Column(db.Integer, primary_key=True)</pre>
+        </section>
 
-            <h3>Query</h3>
+        <section id="query">
+            <h2>Query</h2>
             <p>Query objects retrieve data using Python:</p>
             <pre>user = User.query.filter_by(username="john").first()</pre>
+        </section>
 
-            <h3>Session</h3>
+        <section id="session">
+            <h2>Session</h2>
             <p>The session tracks changes to objects and handles database communication:</p>
             <pre>
 db.session.add(new_user)
 db.session.commit()
             </pre>
+        </section>
 
-            <h3>Commit</h3>
+        <section id="commit">
+            <h2>Commit</h2>
             <p>Commits changes in the current session to the database:</p>
             <pre>db.session.commit()</pre>
+        </section>
 
-            <h3>Rollback</h3>
+        <section id="rollback">
+            <h2>Rollback</h2>
             <p>Reverts uncommitted changes in case of errors:</p>
             <pre>db.session.rollback()</pre>
+        </section>
 
-            <h3>Engine</h3>
+        <section id="engine">
+            <h2>Engine</h2>
             <p>The engine connects SQLAlchemy to the database:</p>
             <pre>app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/login_db'</pre>
+        </section>
 
-            <h3>Metadata</h3>
+        <section id="metadata">
+            <h2>Metadata</h2>
             <p>Metadata stores information about tables, columns, and constraints:</p>
             <pre>
 with app.app_context():
@@ -141,8 +237,10 @@ with app.app_context():
             </pre>
         </section>
     </main>
+
     <footer>
         <p>&copy; 2026 Krishnamohan Yagneswaran</p>
     </footer>
+
 </body>
 </html>
