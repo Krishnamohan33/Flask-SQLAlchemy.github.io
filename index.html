@@ -19,7 +19,7 @@
 
         /* Sidebar */
         nav {
-            width: 220px;
+            width: 240px;
             background-color: #fff;
             border-right: 1px solid #ddd;
             padding: 2rem 1rem;
@@ -31,8 +31,9 @@
 
         nav h2 {
             color: #4CAF50;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-top: 0;
+            margin-bottom: 1rem;
         }
 
         nav ul {
@@ -41,12 +42,13 @@
         }
 
         nav li {
-            margin: 1rem 0;
+            margin: 0.8rem 0;
         }
 
         nav a {
             color: #333;
             text-decoration: none;
+            font-weight: 500;
         }
 
         nav a:hover {
@@ -57,8 +59,8 @@
         main {
             flex: 1;
             max-width: 900px;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
+            margin: 2rem;
+            padding: 2rem;
             background-color: white;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 8px;
@@ -69,7 +71,7 @@
             color: white;
             padding: 2rem;
             text-align: center;
-            margin-left: 220px;
+            flex-basis: 100%;
         }
 
         header h1 {
@@ -106,7 +108,7 @@
             text-align: center;
             padding: 1rem;
             color: #777;
-            margin-left: 220px;
+            flex-basis: 100%;
         }
 
         @media (max-width: 900px) {
@@ -119,9 +121,6 @@
                 position: relative;
                 box-shadow: none;
             }
-            header, footer {
-                margin-left: 0;
-            }
         }
     </style>
 </head>
@@ -130,6 +129,7 @@
     <nav>
         <h2>Quick Links</h2>
         <ul>
+            <li><a href="#note">Note</a></li>
             <li><a href="#introduction">Introduction</a></li>
             <li><a href="#model">Model</a></li>
             <li><a href="#column">Column</a></li>
@@ -149,9 +149,11 @@
     </header>
 
     <main>
-        <section id="introduction">
+        <section id="note">
             <p><strong>Note:</strong> This documentation was written for self-learning purposes to better understand Flask-SQLAlchemy ORM. For complete and official documentation, visit <a href="https://docs.sqlalchemy.org/en/20/orm/quickstart.html" target="_blank">SQLAlchemy Official Documentation</a>.</p>
+        </section>
 
+        <section id="introduction">
             <h2>Introduction to SQLAlchemy ORM</h2>
             <p>ORM stands for <strong>Object Relational Mapper</strong>. ORM lets you work with a database using Python objects instead of raw SQL queries.</p>
             <p>Instead of writing SQL:</p>
